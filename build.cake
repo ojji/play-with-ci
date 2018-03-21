@@ -9,7 +9,7 @@ var outputDirectory = new DirectoryPath("./dist");
 var testResultsDirectory = new DirectoryPath("./dist/test-results");
 var coverage = new FilePath("./dist/coverage/coverage.html");
 var branchName = EnvironmentVariable("TRAVIS_BRANCH") ?? EnvironmentVariable("APPVEYOR_REPO_BRANCH");
-var sonarLogin = EnvironmentVariable("SONAR_TOKEN")
+var sonarLogin = EnvironmentVariable("SONAR_TOKEN");
 
 Task("Clean")
     .Does(() => {
@@ -94,8 +94,8 @@ Task("SonarBegin-windows")
             Branch = branchName,
             Url = "https://sonarcloud.io",
             Organization = "ojji-github",
-            DotCoverReportsPath = coverage,
-            VsTestReportsPath = testResultsDirectory.CombineWithFilePath("*.trx")
+            DotCoverReportsPath = coverage.FullPath,
+            VsTestReportsPath = testResultsDirectory.CombineWithFilePath("*.trx").FullPath
         });
     });
 
