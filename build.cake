@@ -13,13 +13,7 @@ var sonarLogin = EnvironmentVariable("SONAR_TOKEN");
 
 Task("Clean")
     .Does(() => {
-        var cleanSettings = new DotNetCoreCleanSettings
-        {
-            Framework = framework,
-            Configuration = configuration
-        };
-
-        DotNetCoreClean("./AppVeyor.sln", cleanSettings);
+        DotNetCoreClean("./AppVeyor.sln");
 
         if (DirectoryExists(outputDirectory))
         {
@@ -37,21 +31,13 @@ Task("Restore")
 
 Task("Build")
     .Does(() => {
-        var buildSettings = new DotNetCoreBuildSettings
-        {
-            Framework = framework,
-            Configuration = configuration
-        };
-        DotNetCoreBuild("./AppVeyor.sln", buildSettings);
+        DotNetCoreBuild("./AppVeyor.sln");
     });
 
 Task("Test-linux")
     .WithCriteria(IsRunningOnUnix)
     .Does(() => {
         DotNetCoreTest("./TestLibrary.Test", new DotNetCoreTestSettings {
-                        Configuration = configuration,
-                        NoBuild = true,
-                        NoRestore = true,
                         ResultsDirectory = testResultsDirectory,
                         Logger = "trx"
         });
@@ -62,9 +48,6 @@ Task("TestAndCover-windows")
     .Does(() => {
         DotCoverAnalyse(tool => {
             tool.DotNetCoreTest("./TestLibrary.Test", new DotNetCoreTestSettings {
-                    Configuration = configuration,
-                    NoBuild = true,
-                    NoRestore = true,
                     ResultsDirectory = testResultsDirectory,
                     Logger = "trx"
                 });
