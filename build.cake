@@ -102,7 +102,9 @@ Task("SonarBegin-windows")
 Task("SonarEnd-windows")
     .WithCriteria(IsRunningOnWindows)
     .Does(() => {
-        SonarEnd()
+        SonarEnd(new SonarEndSettings {
+            Login = sonarLogin
+         });
     });
 
 Task("Default")
