@@ -46,7 +46,7 @@ Task("Build")
             OutputDirectory = outputDirectory,
             NoDependencies = true
         };
-        DotNetCoreBuild("./*", buildSettings);
+        DotNetCoreBuild("./AppVeyor.sln", buildSettings);
     });
 
 Task("Test-linux")
