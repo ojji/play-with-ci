@@ -41,14 +41,12 @@ Task("Build")
     .Does(() => {
         var buildSettings = new DotNetCoreBuildSettings
         {
-            NoRestore = true,
             Framework = framework,
             Configuration = configuration,
             OutputDirectory = outputDirectory,
             NoDependencies = true
         };
-        DotNetCoreBuild("./TestLibrary/TestLibrary.csproj", buildSettings);
-        DotNetCoreBuild("./TestLibrary.Test/TestLibrary.Test.csproj", buildSettings);
+        DotNetCoreBuild("./AppVeyor.sln", buildSettings);
     });
 
 Task("Test-linux")
@@ -110,7 +108,6 @@ Task("SonarEnd-windows")
 Task("Default")
     .IsDependentOn("Clean")
     .IsDependentOn("SonarBegin-windows")
-    .IsDependentOn("Restore")
     .IsDependentOn("Build")
     .IsDependentOn("TestAndCover-windows")
     .IsDependentOn("Test-linux")
