@@ -57,7 +57,8 @@ Task("TestAndCover-windows")
                 ReportType = DotCoverReportType.HTML
             }
             .WithFilter("+:TestLibrary")
-            .WithFilter("-:TestLibrary.Test"));
+            .WithFilter("+:TestLibrary.Test"));
+            //.WithFilter("-:TestLibrary.Test"));
     });
 
 Task("SonarBegin-windows")
