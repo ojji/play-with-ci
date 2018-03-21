@@ -16,12 +16,10 @@ Task("Clean")
         var cleanSettings = new DotNetCoreCleanSettings
         {
             Framework = framework,
-            Configuration = configuration,
-            OutputDirectory = outputDirectory
+            Configuration = configuration
         };
 
-        DotNetCoreClean("./TestLibrary/TestLibrary.csproj", cleanSettings);
-        DotNetCoreClean("./TestLibrary.Test/TestLibrary.Test.csproj", cleanSettings);
+        DotNetCoreClean("./AppVeyor.sln", cleanSettings);
 
         if (DirectoryExists(outputDirectory))
         {
@@ -42,9 +40,7 @@ Task("Build")
         var buildSettings = new DotNetCoreBuildSettings
         {
             Framework = framework,
-            Configuration = configuration,
-            OutputDirectory = outputDirectory,
-            NoDependencies = true
+            Configuration = configuration
         };
         DotNetCoreBuild("./AppVeyor.sln", buildSettings);
     });
@@ -56,7 +52,6 @@ Task("Test-linux")
                         Configuration = configuration,
                         NoBuild = true,
                         NoRestore = true,
-                        OutputDirectory = outputDirectory,
                         ResultsDirectory = testResultsDirectory,
                         Logger = "trx"
         });
@@ -70,7 +65,6 @@ Task("TestAndCover-windows")
                     Configuration = configuration,
                     NoBuild = true,
                     NoRestore = true,
-                    OutputDirectory = outputDirectory,
                     ResultsDirectory = testResultsDirectory,
                     Logger = "trx"
                 });
