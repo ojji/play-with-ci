@@ -95,7 +95,7 @@ Task("SonarBegin-windows")
             Url = "https://sonarcloud.io",
             Organization = "ojji-github",
             DotCoverReportsPath = coverage.FullPath,
-            VsTestReportsPath = testResultsDirectory.CombineWithFilePath("*.trx").FullPath
+            VsTestReportsPath = testResultsDirectory.FullPath + "*.trx"
         });
     });
 
