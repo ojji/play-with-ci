@@ -5,7 +5,7 @@ configuration: Release
 init:
   - cmd: git config --global core.autocrlf true
 install:
-  # nothing yet
+  - cmd: docker run -d -p 6379:6379 redislabs/redisearch:latest --protected-mode no --loadmodule /usr/lib/redis/modules/redisearch.so
 build_script:
   - ps: .\build.ps1
 test: off

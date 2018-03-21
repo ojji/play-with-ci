@@ -58,7 +58,6 @@ Task("TestAndCover-windows")
             }
             .WithFilter("+:TestLibrary")
             .WithFilter("+:TestLibrary.Test"));
-            //.WithFilter("-:TestLibrary.Test"));
     });
 
 Task("SonarBegin-windows")
